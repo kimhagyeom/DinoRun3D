@@ -15,28 +15,42 @@ public class DinoPositionController : MonoBehaviour
     }
     private void SetDinoPosition()
     {
-        //360도 각도 계산을 위한 각도 증가값
-        float angleStep = 360f / (raptors.childCount * ratio);
-        //Q. 왜 9마리일대는 잘되고, 1마리 더 늘려서 10마리가 되면 왜 뭉쳐서 달릴까?
-        //A. 10 * 0.1 은 1이 되므로
-
-        for(int i =0; i< raptors.childCount; i++)
+        for (int i = 0; i < raptors.childCount; i++)
         {
-            //각 오브젝트의 배치 각도 계산
-            float angle = i * angleStep;
+            if (i > 8) //Raptor 오브젝트가 10개째부터는 화면에 보이지지 않게 함(i 는 0부터 시작되므로 9가 10번째이다)
+            {
+                //보이지 않게 만들어주는 코드
+                raptors.GetChild(i).gameObject.SetActive(false); //10번째 오브젝트부터는 화면에 보이지 않게 함
+                continue; //이 아래의 계산은 하지 않는다 즉 continue 아래에 있는 코드들은 실행되지 않고, 바로 다음 루프로 넘어감
+            }
+            else //Raptor의 개수가 9개 이하일 때는 각도 계산해서 배치해줌
+            {
+                //보이게 하면서 배치를 계산하는 코드
+                if(raptors.childCount < 10 )
+                {
+                    //360도 각도 계산을 위한 각도 증가값
+                    float angleStep = 360f / (raptors.childCount * ratio);
+                    //Q. 왜 9마리일대는 잘되고, 1마리 더 늘려서 10마리가 되면 왜 뭉쳐서 달릴까?
+                    //A. 10 * 0.1 은 1이 되므로
 
-            //각도를 라디안으로 변환
-            float angleRad = angle * Mathf.Deg2Rad;
 
-            //x와 z 좌표를 원형으로 계산
-            float x = Mathf.Cos(angleRad) * radius;
-            float z = Mathf.Sin(angleRad) * radius;
+                    //각 오브젝트의 배치 각도 계산
+                    float angle = i * angleStep;
 
-            //새로운 위치로 자식 오브젝트를 위치시킴
-            raptors.GetChild(i).localPosition = new Vector3(x, 0, z);
+                    //각도를 라디안으로 변환
+                    float angleRad = angle * Mathf.Deg2Rad;
+
+                    //x와 z 좌표를 원형으로 계산
+                    float x = Mathf.Cos(angleRad) * radius;
+                    float z = Mathf.Sin(angleRad) * radius;
+
+                    //새로운 위치로 자식 오브젝트를 위치시킴
+                    raptors.GetChild(i).localPosition = new Vector3(x, 0, z);
+                    raptors.GetChild(i).gameObject.SetActive(true);
+                }
+            }
         }
     }
-
     //** chlid dino들을 일렬로 고르게 배치하는 방법 ** (내 방식으로 바꿔보기)
     //  void Start()
     //  {
