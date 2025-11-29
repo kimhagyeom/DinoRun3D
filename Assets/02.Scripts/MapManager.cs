@@ -19,7 +19,7 @@ public class MapManager : MonoBehaviour
                 //2번째 Map에서부터 이전 Map의 크기의 반을 더해준다
                 mapPosition.z += selectedMap.GetComponent<Map>().GetMapSize() / 2;
             }
-            GameObject nowMap = Instantiate(selectedMap, mapPosition, Quaternion.identity); // 현재 만들 맵 생성  Quaternion : ? 다음주.
+            GameObject nowMap = Instantiate(selectedMap, mapPosition, Quaternion.identity); // 현재 만들 맵 생성
             mapPosition.z += nowMap.GetComponent<Map>().GetMapSize() / 2; //현재 생성된 Map의 길이의 반을 더한다.
         }
     }
