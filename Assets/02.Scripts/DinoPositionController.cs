@@ -1,39 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DinoPositionController : MonoBehaviour
 {
     public Transform raptors; //Raptor들을 관리할 부모 오브젝트
                               // public float dinoGapX;
-
     public GameObject raptorPrefab; // 추가할 Raptor 프리팹
 
     public float radius = 1f; //원의 반지름
     public float ratio = 0.1f; //배치 간격 비율(작을수록 촘촘)
 
+    void Start()
+    {
+    }
     void Update()
     {
         SetDinoPosition();
     }
-    
     public void SetDoorcalc(DoorType doorType, int doorNumber)
     {
-        if(doorType.Equals(DoorType.Plus)) //더하기
+        if(doorType.Equals(DoorType.Plus)) //더하기 
         {
             PlusRaptor(doorNumber);
         }
         else if (doorType.Equals(DoorType.Minus)) //빼기
         {
-
+            Minusraptor(doorNumber);
         }
         else if (doorType.Equals(DoorType.Times)) //곱하기
         {
-
+            int raptorNum = (raptors.childCount * (doorNumber - 1)); //(+)를 이용해서 * 계산하기
+            PlusRaptor(raptorNum);
         }
         else if (doorType.Equals(DoorType.Division)) //나누기
         {
-
+            //계산 후
+            int raptorNum = raptors.childCount - (raptors.childCount / doorNumber); //(-) 를 이용해서 / 계산하기
+            //빼야할 값을 이용해서 빼기 함수 이용
+            Minusraptor(raptorNum);
         }
     }
     private void PlusRaptor(int number)
@@ -41,6 +47,22 @@ public class DinoPositionController : MonoBehaviour
         for(int i = 0; i<number; i++)
         {
             Instantiate(raptorPrefab, raptors); //매개변수로 받은 number 수만큼 raptorPrefab을 생성자가 줍니다
+        }
+    }
+    private void Minusraptor(int number)
+    {
+        //빼는 숫자가 현재 나의 Raptor숫자보다 더 크면
+        if(number > raptors.childCount)
+        {
+            //빼는 숫자를 현재 나의 Raptor 수로 세팅해준다.(어차피 0이 될 것이므로, 나중에 0이 되면 게임오버  시킬 것임)
+            number = raptors.childCount;
+        }
+        int raptorNum = raptors.childCount; //현재 나의  Raptor 숫자를 구하고
+
+        //맨 마지막 Raptor 오브젝트부터 시작해서 전체 Raptor에서 문에 써져있는 숫자만큼 밴 값보다 같거나 클때까지 점점 i를 줄이면서
+        for(int i = raptorNum -1; i>=(raptorNum - number); i--)
+        {
+            Destroy(raptors.GetChild(i).gameObject);//맨 마지막 오브젝트부터 삭제 시킵니다.
         }
     }
     private void SetDinoPosition()
@@ -62,7 +84,6 @@ public class DinoPositionController : MonoBehaviour
                     float angleStep = 360f / (raptors.childCount * ratio);
                     //Q. 왜 9마리일대는 잘되고, 1마리 더 늘려서 10마리가 되면 왜 뭉쳐서 달릴까?
                     //A. 10 * 0.1 은 1이 되므로
-
 
                     //각 오브젝트의 배치 각도 계산
                     float angle = i * angleStep;

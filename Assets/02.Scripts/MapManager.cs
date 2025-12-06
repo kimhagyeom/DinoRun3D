@@ -14,10 +14,15 @@ public class MapManager : MonoBehaviour
         {
             //만들 맵을 랜덤으로 선택한다
             GameObject selectedMap = mapPrefabs[Random.Range(0, mapPrefabs.Length)];//0,1,2 인덱스 중에 뽑힘
+
             if (i > 0)
             {
                 //2번째 Map에서부터 이전 Map의 크기의 반을 더해준다
                 mapPosition.z += selectedMap.GetComponent<Map>().GetMapSize() / 2;
+            }
+            else
+            {
+                selectedMap = mapPrefabs[0]; //처음에는 무조건  0번째 배열의 Map이 만들어진다.
             }
             GameObject nowMap = Instantiate(selectedMap, mapPosition, Quaternion.identity); // 현재 만들 맵 생성
             mapPosition.z += nowMap.GetComponent<Map>().GetMapSize() / 2; //현재 생성된 Map의 길이의 반을 더한다.
