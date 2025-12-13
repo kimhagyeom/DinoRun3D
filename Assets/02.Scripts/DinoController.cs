@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DinoController : MonoBehaviour
 {
+    public static DinoController instance; //싱글톤
     public float moveSpeedZ; //z축 움직이는 속도 변수
     public float moveSpeedX; //x축 움직이는 속도 변수
 
@@ -15,14 +16,29 @@ public class DinoController : MonoBehaviour
 
     public DinoPositionController dinoPositionController;
 
+    private void Awake() //싱글톤
+    {
+        if (instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+
     void Start()
     {
         
     }
     void Update()
     {
-        DinoMove(); // (alt + enter키 메서드 추출 -> 함수 만들어줌)
-        DoorCheck();
+        if (GameManager.instance.isGameStart == true)
+        {
+            DinoMove(); // (alt + enter키 메서드 추출 -> 함수 만들어줌)
+            DoorCheck();
+        }
     }
 
     private void DinoMove()
