@@ -881,7 +881,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGameStart: 0
   titlePanel: {fileID: 765826428}
-  progressBar: {fileID: 0}
+  progressBar: {fileID: 1949173991}
 --- !u!4 &843034687
 Transform:
   m_ObjectHideFlags: 0
@@ -1153,7 +1153,7 @@ MonoBehaviour:
   - {fileID: 7393083278818259954, guid: c28eaa37ce987fc4886cb3f552d7d0d9, type: 3}
   - {fileID: 2982287614729325142, guid: c62837ad3e1b3c54086e25b431534053, type: 3}
   - {fileID: 4888792957136770769, guid: 57a153c41a3235445843271b24e382a6, type: 3}
-  goalObject: {fileID: 0}
+  goalObject: {fileID: 7393083278818259954, guid: e7c8314b17033ea4db4a283422b92d41, type: 3}
 --- !u!4 &1043919814
 Transform:
   m_ObjectHideFlags: 0

@@ -24,16 +24,20 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
     }
-    
+
     private void Start()
     {
         Time.timeScale = 0f;
     }
     public void SetDistanceProgressBar() //프로그래스바를 세팅하기 위한 함수
     {
-        //DinoController.instance.dinoPositionController;
-        //MapManager.instance.GetGoalDistance;
-           
+        float goalDistance = MapManager.instance.GetGoalDistance();
+        float dinoDistance = DinoController.instance.GetDinoDistance();
+
+        float dis;
+        dis = goalDistance - dinoDistance;
+        float value = dis * 0.01f;
+        progressBar.value = value;
     }
     public void GameStart()
     {
@@ -41,5 +45,13 @@ public class GameManager : MonoBehaviour
         isGameStart = true;
         Debug.Log("게임 시작 버튼 누름");
         titlePanel.SetActive(false);
+    }
+
+    void Update()
+    {
+        if (isGameStart)
+        {
+            SetDistanceProgressBar();
+        }
     }
 }

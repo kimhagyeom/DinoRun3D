@@ -112,4 +112,8 @@ public class DinoController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position + sphereCenter, sphereRadius);
     }
+    public float GetDinoDistance()
+    {
+        return transform.position.z;
+    }
 }
