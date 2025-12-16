@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
     }
-
     private void Start()
     {
         Time.timeScale = 0f;
@@ -34,9 +33,7 @@ public class GameManager : MonoBehaviour
         float goalDistance = MapManager.instance.GetGoalDistance();
         float dinoDistance = DinoController.instance.GetDinoDistance();
 
-        float dis;
-        dis = goalDistance - dinoDistance;
-        float value = dis * 0.01f;
+        float value = dinoDistance / goalDistance;
         progressBar.value = value;
     }
     public void GameStart()

@@ -27,7 +27,6 @@ public class DinoController : MonoBehaviour
             instance = this;
         }
     }
-
     void Start()
     {
         
@@ -114,6 +113,6 @@ public class DinoController : MonoBehaviour
     }
     public float GetDinoDistance()
     {
-        return transform.position.z;
+        return dinoPositionController.transform.position.z;
     }
 }
