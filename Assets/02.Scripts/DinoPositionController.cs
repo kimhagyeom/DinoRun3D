@@ -60,7 +60,7 @@ public class DinoPositionController : MonoBehaviour
         //빼는 숫자가 현재 나의 Raptor숫자보다 더 크면
         if (number > raptors.childCount)
         {
-            //빼는 숫자를 현재 나의 Raptor 수로 세팅해준다.(어차피 0이 될 것이므로, 나중에 0이 되면 게임오버  시킬 것임)
+            //빼는 숫자를 현재 나의 Raptor 수로 세팅해준다.(어차피 0이 될 것이므로, 나중에 0이 되면 게임오버 시킬 것임)
             number = raptors.childCount;
         }
         int raptorNum = raptors.childCount; //현재 나의  Raptor 숫자를 구하고

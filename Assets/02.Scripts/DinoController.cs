@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DinoController : MonoBehaviour
 {
@@ -85,8 +86,11 @@ public class DinoController : MonoBehaviour
             {
                 //Goal인 지점에 닿았을 때
                 Debug.Log("골인!");
+                PlayerPrefs.SetInt("Stage", PlayerPrefs.GetInt("Stage") + 1); //현재 stage에서 1더하고 저장(다음 스테이지의 숫자 갱신)
+
                 //충돌한 오브젝트의 Boxcollider컴포넌트를 비활성화 해줌
                 doors.gameObject.GetComponent<BoxCollider>().enabled = false;
+                SceneManager.LoadScene(0); //0번씬(현재씬)을 로드해서 갱신
             }
             else
             {
