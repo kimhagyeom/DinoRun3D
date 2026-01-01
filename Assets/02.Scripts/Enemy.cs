@@ -26,24 +26,33 @@ public class Enemy : MonoBehaviour
         switch (state)
         {
             case State.Idle:
-                DetectDion();
+                DetectDino();
                 break;
             case State.Run:
                 GoToDino();
                 break;
         }
     }
-    private void DetectDion() //Dino를 찾고 있는 함수, 항상 Update에서 작동 되고 있음
+    private void DetectDino() // Dino를 찾고 있는 함수, 항상 Update에서 작동 되고 있음.
     {
-        //구체 영역 내의 Collider들을 감지
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position , detectRadius);
+        // 구체 영역 내의 Collider들을 감지
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectRadius);
 
-        //감지된 collider들 처리
-        foreach (Collider doors in hitColliders)
+        // 감지된 Collider들 처리
+        foreach (Collider colls in hitColliders)
         {
-            //검색된 곳에 Dino가 있다면
+            // 검색된 곳에  Dino가 있다면
+            if (colls.gameObject.GetComponent<Raptor>() != null)
+            {
+                if (colls.gameObject.GetComponent<Raptor>().IsTarget()) // 이미 타겟으로 지정되어 있다면, 다음 충돌 오브젝트로
+                    continue;
 
-            StartGotoDino(); //Dino에게 가는 상태로 바꿔주는 함수 실행
+                colls.gameObject.GetComponent<Raptor>().SetTarget();  // 충돌 오브젝트에 타겟으로 지정됐다고 스위치 켜주고
+
+                targetRaptor = colls.gameObject.transform;   // 충돌 오브젝트를 targetRaptor로 지정해줌
+
+                StartGotoDino();  // 상태 바꿔주는 함수 실행
+            }
         }
     }
     private void StartGotoDino() //찾았을때 작동하는 함수

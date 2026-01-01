@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro; //Text 사용하기 위햐여
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; //Text 사용하기 위햐여
+using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -10,13 +12,14 @@ public class GameManager : MonoBehaviour
 
     public bool isGameStart;
 
-    public GameObject titlePanel; //처음부터 활성
-    public GameObject gamePanel; //처음엔 비활성
+    public GameObject titlePanel;  //  처음부터 활성
+    public GameObject gamePanel;  // 처음엔 비활성
+    public GameObject gameOverPanel;
 
     public Slider progressBar;
 
-    public TextMeshProUGUI nowStageText; //현재 스테이지 Text
-    public TextMeshProUGUI nextStageText; //다음 스테이지 Text
+    public TextMeshProUGUI nowStageText;  // 현재 스테이지 Text
+    public TextMeshProUGUI nextStageText; // 다음 스테이지 Text
 
     private void Awake() //싱글톤
     {
@@ -36,6 +39,8 @@ public class GameManager : MonoBehaviour
         progressBar.value = 0f; //처음엔 간 거리를 0으로 세팅
         titlePanel.SetActive(true); //처음엔 Title화면만 보임
         gamePanel.SetActive(false); //Game화면은 비활성화
+        gameOverPanel.SetActive(false);  // GameOver화면은 비활성화
+
         nowStageText.text = MapManager.instance.GetStage().ToString();
         nextStageText.text = (MapManager.instance.GetStage() + 1).ToString();
 
@@ -67,6 +72,15 @@ public class GameManager : MonoBehaviour
         titlePanel.SetActive(false); //게임 시작하면 Title화면은 비활성화
         gamePanel.SetActive(true); //게임 시작하면 GamePanel 활성화
     }
-
-    
+    public void RestarGame()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void GameOver()
+    {
+        isGameStart = false;
+        Time.timeScale = 0f;
+        gamePanel.SetActive(false);
+        gameOverPanel.SetActive(true);
+    }
 }

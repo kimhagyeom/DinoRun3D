@@ -85,32 +85,29 @@ public class DinoController : MonoBehaviour
             if (doors.CompareTag("Goal"))
             {
                 //Goal인 지점에 닿았을 때
-                Debug.Log("골인!");
                 PlayerPrefs.SetInt("Stage", PlayerPrefs.GetInt("Stage") + 1); //현재 stage에서 1더하고 저장(다음 스테이지의 숫자 갱신)
 
                 //충돌한 오브젝트의 Boxcollider컴포넌트를 비활성화 해줌
                 doors.gameObject.GetComponent<BoxCollider>().enabled = false;
                 SceneManager.LoadScene(0); //0번씬(현재씬)을 로드해서 갱신
             }
-            else
+            else if (doors.gameObject.GetComponent<SelectDoors>() != null)
             {
-                //Debug.Log("감지된 오브젝트" + doors.gameObject.name);
-                //여기에서 충돌한 Door의 타입과 문에 써진 숫자를 받아와서
+                // 여기에서 충돌한 Door의 타입과 문에 써진 숫자를 받아와서
                 int doorNumber = doors.gameObject.GetComponent<SelectDoors>().GetDoorNumber(transform.position.x);
                 DoorType doorType = doors.gameObject.GetComponent<SelectDoors>().GetDoorType(transform.position.x);
 
-                //충돌한 오브젝트의 Boxcollider컴포넌트를 비활성화 해줌
+                // 충돌한 오브젝트의 BoxCollider컴포넌트를 비활성화 해줌.
                 doors.gameObject.GetComponent<BoxCollider>().enabled = false;
 
-                //DionPositioncontroller 스크립트에서 적절하게 사칙연산에 맞게 계산해서 Rapotor들을 늘이거나 줄이면 될거 같음.
-                dinoPositionController.SetDoorcalc(doorType, doorNumber);
+                // DinoPositionController스크립트에서 적절하게 사칙연산에 맞게 계산해야 함.
+                dinoPositionController.SetDoorCalc(doorType, doorNumber);
             }
-            
         }
     }
 
     //구체 영역을 Gizmo로 시각화
-     void OnDrawGizmos()
+    void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position + sphereCenter, sphereRadius);

@@ -23,9 +23,15 @@ public class DinoPositionController : MonoBehaviour
     }
     void Update()
     {
+        if (GameManager.instance.isGameStart.Equals(false)) //게임 시작이 안됐으면 리턴
+            return;
         SetDinoPosition();
+        if (raptors.childCount <= 0)//Raptor가 0보다 작거나 같다면
+        {
+            GameManager.instance.GameOver();
+        }
     }
-    public void SetDoorcalc(DoorType doorType, int doorNumber)
+    public void SetDoorCalc(DoorType doorType, int doorNumber)
     {
         if (doorType.Equals(DoorType.Plus)) //더하기 
         {

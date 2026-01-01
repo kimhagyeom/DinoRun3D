@@ -3068,6 +3068,7 @@ GameObject:
   - component: {fileID: 4393945460822721978}
   - component: {fileID: 5105248593082761302}
   - component: {fileID: 2281023552711142926}
+  - component: {fileID: 1198398385826170884}
   m_Layer: 0
   m_Name: EnemyRaptor
   m_TagString: Untagged
@@ -3250,6 +3251,20 @@ MonoBehaviour:
   deathClips:
   - {fileID: 8300000, guid: 399d4fa3cddfd664cb117049933b2554, type: 3}
   - {fileID: 8300000, guid: 655ae2339de0ea14c8adefdcb28e2ffa, type: 3}
+--- !u!114 &1198398385826170884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7118192444493907911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbe2e98e288868c4fb4121a11642a32b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 10
+  detectRadius: 8
 --- !u!1 &7352760408310069845
 GameObject:
   m_ObjectHideFlags: 0
