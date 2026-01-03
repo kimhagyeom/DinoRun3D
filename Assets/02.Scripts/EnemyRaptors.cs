@@ -16,6 +16,7 @@ public class EnemyRaptors : MonoBehaviour
     void Start()
     {
         CreateEnemyRaptors();
+        this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
     }
 
     private void CreateEnemyRaptors()
@@ -37,5 +38,4 @@ public class EnemyRaptors : MonoBehaviour
             enemyRaptor.gameObject.transform.localPosition = new Vector3(x, 0, z);
         }
     }
-
 }

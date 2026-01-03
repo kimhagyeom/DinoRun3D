@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject titlePanel;  //  처음부터 활성
     public GameObject gamePanel;  // 처음엔 비활성
     public GameObject gameOverPanel;
+    public GameObject gameClearPanel;
 
     public Slider progressBar;
 
@@ -35,11 +36,14 @@ public class GameManager : MonoBehaviour
     
     private void Start()
     {
+       // PlayerPrefs.DeleteAll();
+
         Time.timeScale = 0f; //시간을 멈춰서 처음부터 Dino가 달리는걸 막아준다
         progressBar.value = 0f; //처음엔 간 거리를 0으로 세팅
         titlePanel.SetActive(true); //처음엔 Title화면만 보임
         gamePanel.SetActive(false); //Game화면은 비활성화
         gameOverPanel.SetActive(false);  // GameOver화면은 비활성화
+        gameClearPanel.SetActive(false); //GameClear화면은 비활성화
 
         nowStageText.text = MapManager.instance.GetStage().ToString();
         nextStageText.text = (MapManager.instance.GetStage() + 1).ToString();
@@ -75,12 +79,24 @@ public class GameManager : MonoBehaviour
     public void RestarGame()
     {
         SceneManager.LoadScene(0);
+       // PlayerPrefs.DeleteAll();
     }
     public void GameOver()
     {
+        SoundManager.instance.GameOverSoundPlay(); //gameOver소리
         isGameStart = false;
         Time.timeScale = 0f;
         gamePanel.SetActive(false);
         gameOverPanel.SetActive(true);
+    }
+    public void StageClear()
+    {
+        SoundManager.instance.GameClearSoundPlay(); //gameClear소리
+        Debug.Log("다음스테이지");
+        isGameStart = false;
+        Time.timeScale = 1f;
+        gameClearPanel.SetActive(true);
+        gameOverPanel.SetActive(false);
+        gamePanel.SetActive(false);
     }
 }

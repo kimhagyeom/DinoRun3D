@@ -80,7 +80,7 @@ public class MapManager : MonoBehaviour
     }
     public int GetStage()
     {
-        return PlayerPrefs.GetInt("Stage", 1); //playerprefs 사용법 1.데이터 저장(세가지 데이터 유형(정수, 부동소수점,문자열)을 저장 할 수 있다)
+        return PlayerPrefs.GetInt("Stage", 0); //playerprefs 사용법 1.데이터 저장(세가지 데이터 유형(정수, 부동소수점,문자열)을 저장 할 수 있다)
     }
     public float GetGoalDistance()
     {

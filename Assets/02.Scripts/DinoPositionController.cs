@@ -103,7 +103,6 @@ public class DinoPositionController : MonoBehaviour
                     //위치 설정                                                                                                             //[피보나치수열]
                     raptors.GetChild(i).localPosition = new Vector3(x, 0, z);                                                               //[피보나치수열]
                     raptors.GetChild(i).gameObject.SetActive(true); //visibleRaptorNumber보다 작은 오브젝트부터는 화면에 보이게 함.         //[피보나치수열]
-                                                                                                                                            //[피보나치수열]
                 }                                                                                                                           //[피보나치수열]
             }                                                                                                                               //[피보나치수열]
         }                                                                                                                                   //[피보나치수열]

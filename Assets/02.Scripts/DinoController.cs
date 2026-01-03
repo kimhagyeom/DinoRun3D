@@ -80,7 +80,7 @@ public class DinoController : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position + sphereCenter, sphereRadius);
 
         //감지된 collider들 처리
-        foreach(Collider doors in hitColliders)
+        foreach (Collider doors in hitColliders)
         {
             if (doors.CompareTag("Goal"))
             {
@@ -89,10 +89,15 @@ public class DinoController : MonoBehaviour
 
                 //충돌한 오브젝트의 Boxcollider컴포넌트를 비활성화 해줌
                 doors.gameObject.GetComponent<BoxCollider>().enabled = false;
-                SceneManager.LoadScene(0); //0번씬(현재씬)을 로드해서 갱신
+
+                //SceneManager.LoadScene(0); //0번씬(현재씬)을 로드해서 갱신
+
+                //GameManager의 Stageclear함수를 실행해주면 될 것 같다.
+                GameManager.instance.StageClear();
             }
             else if (doors.gameObject.GetComponent<SelectDoors>() != null)
             {
+                SoundManager.instance.DoorHitSoundPlay(); //Door와 충돌할때 소리 남
                 // 여기에서 충돌한 Door의 타입과 문에 써진 숫자를 받아와서
                 int doorNumber = doors.gameObject.GetComponent<SelectDoors>().GetDoorNumber(transform.position.x);
                 DoorType doorType = doors.gameObject.GetComponent<SelectDoors>().GetDoorType(transform.position.x);
@@ -105,7 +110,6 @@ public class DinoController : MonoBehaviour
             }
         }
     }
-
     //구체 영역을 Gizmo로 시각화
     void OnDrawGizmos()
     {

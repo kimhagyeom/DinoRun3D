@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ccf8893c63d1d4ea3fe8dc0c7461b1, type: 3}
+  m_Name: Stage4
+  m_EditorClassIdentifier: 
+  maps:
+  - {fileID: 7311799543192531890, guid: bac54890a45bd0b47bb375f0311649ab, type: 3}
+  - {fileID: 5114324991708797547, guid: 57a153c41a3235445843271b24e382a6, type: 3}
+  - {fileID: 7311799543192531890, guid: c62837ad3e1b3c54086e25b431534053, type: 3}
+  - {fileID: 5114324991708797547, guid: 58963276e8c00404abc1a9d98f39737c, type: 3}
+  - {fileID: 6733762171142029691, guid: e84876f90c0f4964695033505c4adbe9, type: 3}
+  - {fileID: 5114324991708797547, guid: 57a153c41a3235445843271b24e382a6, type: 3}
+  - {fileID: 7311799543192531890, guid: 813f56dd6011a18458b8e937d13f63b6, type: 3}
+  - {fileID: 6733762171142029691, guid: e7c8314b17033ea4db4a283422b92d41, type: 3}
