@@ -10,7 +10,7 @@ public class DinoFollowCamera : MonoBehaviour
     void Start()
     {
         offset = target.position - transform.position;
-        //왜 빼야 하는가 ex) 그래프에서 A(2,1) 과 B(5,3)이 있다고 치자 유도탄 : A-B(-3,-2) // B-A(3,2) +메모장 추가 설명
+        //왜 빼야 하는가 ex) 그래프에서 A(2,1) 과 B(5,3)이 있다고 치자 유도탄 : A-B(-3,-2) // B-A(3,2)
     }
     void LateUpdate()
     {
