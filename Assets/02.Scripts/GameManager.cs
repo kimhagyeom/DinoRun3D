@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI nowStageText;  // 현재 스테이지 Text
     public TextMeshProUGUI nextStageText; // 다음 스테이지 Text
 
+    public static bool isNextStage = false;
+
     private void Awake() //싱글톤
     {
         if (instance != null)
@@ -37,6 +39,17 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // PlayerPrefs.DeleteAll();
+
+        // 스테이지 텍스트는 항상 세팅
+        nowStageText.text = MapManager.instance.GetStage().ToString();
+        nextStageText.text = (MapManager.instance.GetStage() + 1).ToString();
+        progressBar.value = 0f;
+        if (isNextStage)
+        {
+            isNextStage = false;
+            GameStart(); // 타이틀 스킵하고 바로 게임 시작
+            return;
+        }
 
         Time.timeScale = 0f; //시간을 멈춰서 처음부터 Dino가 달리는걸 막아준다
         progressBar.value = 0f; //처음엔 간 거리를 0으로 세팅
@@ -97,8 +110,9 @@ public class GameManager : MonoBehaviour
     }
     public void NextStage()
     {
+        isNextStage = true;
         Time.timeScale = 1f;
-        SceneManager.LoadScene(0); // 여기서 씬 전환
+        SceneManager.LoadScene(0);
     }
     public void RestarGame()
     {

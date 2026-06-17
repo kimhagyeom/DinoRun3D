@@ -9,6 +9,8 @@ public class DinoController : MonoBehaviour
     public float moveSpeedZ; //z축 움직이는 속도 변수
     public float moveSpeedX; //x축 움직이는 속도 변수
 
+    public float speedIncrease = 1f; //스테이지마다 속도 조절
+
     //구체의 중심이 될 위치
     public Vector3 sphereCenter;
 
@@ -30,7 +32,10 @@ public class DinoController : MonoBehaviour
     }
     void Start()
     {
-        
+        int stage = PlayerPrefs.GetInt("Stage", 0);
+
+        moveSpeedZ += stage * speedIncrease;
+        moveSpeedX += stage * speedIncrease;
     }
     void Update()
     {

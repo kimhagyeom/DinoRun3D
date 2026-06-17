@@ -27,18 +27,23 @@ public class SelectDoors : MonoBehaviour
 
     public Color goodColor; //좋은쪽 문의 색상
     public Color badColor; //나쁜쪽 문의 색상
+
+    public int minNumber = 1; //랜덤  
+    public int maxNumber = 10; //랜덤
+
     void Start()
     {
         SettingDoors();
     }
     void Update()
     {
-        
+
     }
     public void SettingDoors()
     {
+        RandomDoorSetting();
         //오른쪽 문 세팅.
-        if(rightDoorType.Equals(DoorType.Plus))
+        if (rightDoorType.Equals(DoorType.Plus))
         {
             rightDoorSpriteRD.color = goodColor;
             rightDoorText.text = "+" + rightDoorNumber;
@@ -83,7 +88,7 @@ public class SelectDoors : MonoBehaviour
     }
     public DoorType GetDoorType(float xPos)
     {
-        if(xPos > 0) //Dino의 위치값이 0보다 크면
+        if (xPos > 0) //Dino의 위치값이 0보다 크면
         {
             return rightDoorType; //오른쪽 문 타입 반환
         }
@@ -102,5 +107,42 @@ public class SelectDoors : MonoBehaviour
         {
             return leftDoorNumber; //왼쪽 문 값 반환
         }
+    }
+    private void RandomDoorSetting() //랜덤
+    {
+        int stage = PlayerPrefs.GetInt("Stage", 0);
+
+        if (stage == 0)
+        {
+            // 1라운드는 둘 다 좋은 문만
+            rightDoorType = DoorType.Plus;
+            leftDoorType = DoorType.Times;
+        }
+        else if (stage == 1)
+        {
+            // 2라운드는 하나는 좋은 문, 하나는 Minus
+            rightDoorType = DoorType.Plus;
+            leftDoorType = DoorType.Minus;
+        }
+        else
+        {
+            // 3라운드부터 완전 랜덤
+            int rightRandom = Random.Range(0, 4);
+            int leftRandom = Random.Range(0, 4);
+
+            rightDoorType = (DoorType)rightRandom;
+            leftDoorType = (DoorType)leftRandom;
+        }
+
+        // 좌우 위치 랜덤으로 섞기
+        if (Random.Range(0, 2) == 0)
+        {
+            DoorType temp = rightDoorType;
+            rightDoorType = leftDoorType;
+            leftDoorType = temp;
+        }
+
+        rightDoorNumber = Random.Range(1, 10);
+        leftDoorNumber = Random.Range(1, 10);
     }
 }
