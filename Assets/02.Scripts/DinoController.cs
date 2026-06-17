@@ -89,6 +89,7 @@ public class DinoController : MonoBehaviour
         {
             if (doors.CompareTag("Goal"))
             {
+                dinoPositionController.SaveRaptorCount();
                 //Goal인 지점에 닿았을 때
                 PlayerPrefs.SetInt("Stage", PlayerPrefs.GetInt("Stage") + 1); //현재 stage에서 1더하고 저장(다음 스테이지의 숫자 갱신)
 

@@ -19,7 +19,7 @@ public class DinoPositionController : MonoBehaviour
 
     void Start()
     {
-        
+        LoadRaptorCount();
     }
     void Update()
     {
@@ -160,5 +160,35 @@ public class DinoPositionController : MonoBehaviour
     //          transform.GetChild(i).localPosition = new Vector3(startPosX + (dinoGapX * i), 0, 0);
     //      }
     //  }
+    public void SaveRaptorCount()
+    {
+        PlayerPrefs.SetInt("RaptorCount", raptors.childCount);
+    }
+
+    private void LoadRaptorCount()
+    {
+        int savedCount = PlayerPrefs.GetInt("RaptorCount", raptors.childCount);
+
+        int currentCount = raptors.childCount;
+
+        if (savedCount > currentCount)
+        {
+            int addCount = savedCount - currentCount;
+
+            for (int i = 0; i < addCount; i++)
+            {
+                Instantiate(raptorPrefab, raptors);
+            }
+        }
+        else if (savedCount < currentCount)
+        {
+            int removeCount = currentCount - savedCount;
+
+            for (int i = 0; i < removeCount; i++)
+            {
+                Destroy(raptors.GetChild(raptors.childCount - 1).gameObject);
+            }
+        }
+    }
 }
 
